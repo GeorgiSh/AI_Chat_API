@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AI_Chat_API.ViewModels"
+             x:Class="AI_Chat_API.Views.SettingsPage">
+
+    <StackLayout Padding="10" Spacing="20">
+
+        <!-- Add New API Button -->
+        <Button Text="Add New API"
+                Command="{Binding AddApiCommand}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                BackgroundColor="#2c3e50"
+                TextColor="White"
+                CornerRadius="5"
+                HeightRequest="50"
+                FontAttributes="Bold" />
+
+        <!-- Swipe Hint -->
+        <Label Text="Swipe left to edit or delete an API configuration"
+               FontSize="14"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="0, 0, 0, 10"
+               TextColor="Gray" />
+
+        <!-- API Configurations List -->
+        <CollectionView ItemsSource="{Binding ApiConfigurations}" SelectionMode="Single" SelectedItem="{Binding SelectedApiConfig}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" BackgroundColor="Red" Command="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}}, Path=DeleteApiCommand}" CommandParameter="{Binding .}" />
+                                <SwipeItem Text="Edit" BackgroundColor="Orange" Command="{Binding Source={RelativeSource AncestorType={x:Type local:SettingsViewModel}}, Path=EditApiConfigurationCommand}" CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <Grid Padding="10" BackgroundColor="#ecf0f1" Margin="0,5">
+                            <Label Text="{Binding Name}" FontSize="20" VerticalOptions="Center" TextColor="#333333" />
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- API Details Editing -->
+        <StackLayout IsVisible="{Binding IsApiDetailsVisible}" Padding="10" Spacing="10">
+            <Entry Placeholder="API Name" Text="{Binding SelectedApiConfig.Name}" BackgroundColor="#ecf0f1" TextColor="#333333" />
+            <Entry Placeholder="API Key" Text="{Binding SelectedApiConfig.ApiKey}" BackgroundColor="#ecf0f1" TextColor="#333333" />
+            <Entry Placeholder="API URL" Text="{Binding SelectedApiConfig.Url}" BackgroundColor="#ecf0f1" TextColor="#333333" />
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Button Text="Save" Command="{Binding SaveApiCommand}" BackgroundColor="#2c3e50" TextColor="White" CornerRadius="5" />
+                <Button Text="Cancel" Command="{Binding CancelCommand}" BackgroundColor="#2c3e50" TextColor="White" CornerRadius="5" />
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

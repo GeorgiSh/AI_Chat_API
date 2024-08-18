@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AI_Chat_API.ViewModels"
+             x:Class="AI_Chat_API.Views.MainPage">
+
+    <StackLayout Padding="10" Spacing="20">
+        <!-- Add New Chat Session Button -->
+        <Button Text="Add New Chat Session"
+                Command="{Binding AddSessionCommand}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                BackgroundColor="#2c3e50"
+                TextColor="White"
+                CornerRadius="5"
+                HeightRequest="50"
+                FontAttributes="Bold"
+                Margin="0, 10, 0, 20" />
+
+        <!-- Navigation to SettingsPage -->
+        <Button Text="Go to Settings"
+                Command="{Binding GoToSettingsCommand}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                BackgroundColor="#2c3e50"
+                TextColor="White"
+                CornerRadius="5"
+                HeightRequest="50"
+                FontAttributes="Bold"
+                Margin="0, 10, 0, 20" />
+
+        <!-- Chat Sessions List -->
+        <CollectionView ItemsSource="{Binding ChatSessions}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedSession}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" BackgroundColor="#ecf0f1" Margin="0,5">
+                        <Label Text="{Binding SessionName}" 
+                               FontSize="20" 
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Start"
+                               TextColor="#333333" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

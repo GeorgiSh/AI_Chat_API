@@ -1,0 +1,14 @@
+<Shell
+    x:Class="AI_Chat_API.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:AI_Chat_API.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="AI Chat API">
+
+    <ShellContent
+        Title="Settings"
+        ContentTemplate="{DataTemplate views:SettingsPage}"
+        Route="SettingsPage" />
+
+</Shell>
